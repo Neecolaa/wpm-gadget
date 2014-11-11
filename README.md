@@ -1,8 +1,6 @@
-# Versal example gadget
+# Words Per Minute Skill Test
 
-This is a sample gadget, that utilizes versal-gadget-api to ask learner a question.
-
-As an author, you can edit question prompt. As a learner, you can answer the question.
+A simple gadget that challenges the learner to correctly type as many of the words as they can in one minute.
 
 ## Installation and running
 
