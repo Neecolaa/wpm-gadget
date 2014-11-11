@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>W.P.M. Skill Test</title>
+<script src="bower_components/versal-component-runtime/dist/runtime.min.js"></script>
+<link rel="import" href="bower_components/versal-gadget-api/versal-gadget-api.html">
+<link rel="stylesheet" href="assets/wpmstyle.css">
+</head>
+
+<style>
+	input {
+		font-size: 20px;
+		padding: 5px;
+		min-width: 300px;
+	}
+	input[readonly] {
+		border: 1px solid transparent;
+	}
+
+</style>
+
+<body>
+
+<!--<input type="text" name="greeting" readonly value="What is your name?">
+<input type="text" name="learnerName">
+<input type="text" name="greeting" readonly value="What is your name?">-->
+
+<div id="reload box" style="display: block; padding: 10px;">
+	<div id="words" class="row" style="opacity: 1; display: block;">
+		<div id="row1" style="top: 1px; display: block; padding-bottom: 5px;">
+	        
+	        <!--display words-->
+<script>
+	var playerApi = new VersalPlayerAPI();
+	playerApi.watchBodyHeight();
+
+/*Defaults for user adjusted settings*/
+	var words ="deep center agree branch bench arrive beach greedy bright dive alarm chew board cheer enemy bare clear curious brave calm bridge ocean collect seashell pack field hour float eager gentle hero prove pass fresh fair fear plant safe midnight inn idea finally famous cross enormous feast dash frighten dangerous insect forest crowd herd flour entire damp trail travel doubt wave dawn wonder evening exactly search weak steady squeeze weekend tremble pale soar team wise worry warn tool village whisper shiver frown tiny notice stack present rainbow seal leader leap smooth island pain soil nibble scatter signal harm author screech chapter snowstorm blends driving capitalization create moment direction character complete describe fantasy consonants final locate order language punctuation magazine predict initial steer symbol questions written syllable reality handlebars uppercase stream conversation fiction dictionary difference solo discussion brakes quite music adjective unless margin wander glossary pedals nonfiction publish sound quit message noun pronoun prewriting reread purpose quiet verb theater harmony mama textbooks coast important minute chorus forgotten folktale vowel main idea urban obey tradition forgive prank vegetation lowercase doubles another shelter magnet balance thermometer mammoth grouping dissolving minus surprise distance habitat brought certain pebble magnifier caught solid loose experience prehistoric scientist numeral reasoning different weight climate whether custom citizen universe vibration heritage hundred privilege community duty justice aircraft differences listen without continent belongings rural settlement authority services thought through farther country forget landmark volunteer goods fed beautiful beneath example fold education product elections inside asleep believe break teeth please hung equality change almost hungry throat measure fine globe meant maybe crayon thousand sudden among vegetables matter rather chance return corner gather mild worn pint division several quart mayor fool concert noon southern wherever grew flew noise respect football double hook goodbye practice pencil lawn noisy haul period wasps lying bend receive build slept fought correct spend rights mix thick trick built incorrect danger remove bent luck wore probably straight spooky plenty tone increase mailboxes";
+	var visiblelength = 10;
+	
+	/*Starting settings*/
+	//flow variables:
+	var current = 0;
+	var liststart = 0;
+	var listend = visiblelength;
+	var wordlist = words.split(" ");
+	
+	//result variables:
+	var wpm = 0;
+	var correctWord = 0;
+	var wrongWord = 0;
+	var correctStroke = 0;
+	var wrongStroke = 0;
+	
+	//Starting displaying Word
+	ShuffleWordList();
+	DisplayWords();
+
+	//function to display words:
+	function DisplayWords()
+	{
+		var wordwillbedisplay = "";
+		for(i = liststart; i < listend; i++)
+		{
+			if(i === current)
+				wordwillbedisplay += "<span id='word"+i+"' class='currentword'>"+" "+wordlist[i]+" </span>&nbsp;";
+			else
+				wordwillbedisplay += "<span id='word"+i+"' style=''>"+" "+wordlist[i]+" </span>&nbsp;";
+		}
+		document.getElementById("row1").innerHTML = wordwillbedisplay;
+
+	}
+	
+	//function to shuffle words:
+	function ShuffleWordList()
+	{
+		for(i = 0; i < wordlist.length/2; i++)
+		{
+		var rand1 = Math.floor(Math.random() * wordlist.length);
+		var rand2 = Math.floor(Math.random() * wordlist.length);
+		
+		var temp = wordlist[rand1];
+		wordlist[rand1] = wordlist[rand2];
+		wordlist[rand2] = temp;
+		}
+	}
+</script>
+	             
+        </div>
+    </div>
+</div>		
+			<!--input line-->
+			<div id="input-row" class="row">
+	    		<div style="max-width: 620px; margin: auto;">
+	    			
+	    			<!--user input-->
+	        		<div style="margin-right: 137px;">
+	            		<input id="inputfield" class="form-control" type="text" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" placeholder="" dir="ltr" value="" onkeypress="return myKeyPress(event)" onkeyup="checkingCharacter()"></input>
+	        		</div>
+	        		
+	        		<!--timer-->
+	        		<div id="timer" class="" title="" style="width: 70px; margin-right: 7px;">
+	    			1:00
+					</div>
+	        		<!--refresh button-->
+	        		<div style="width: 50px; /*margin-top: -5px;*/ display:block;">
+					    <button id="reload-btn" type="button" onmousedown="refreshButton()">
+					        <span class="refreshBtn">&#8635;</span>
+					    </button>
+					</div>
+	    		</div>
+	    		<div id ="scoreBoard" style="max-width: 620px; margin: auto;">
+					    
+				</div>
+    		</div>
+
+
+</body>
+
+<script type="text/javascript">
+
+		//variable for keypress:
+        myKeyPress.gameOn = false;
+        myKeyPress.timeOn = false;
+        
+        //keyPress function, trigger when the user press a key
+        function myKeyPress(e){
+		
+		//Start the timer:
+		myKeyPress.gameOn = true;		
+		if(myKeyPress.gameOn === true && myKeyPress.timeOn === false)
+		{
+			countdownTimer = setInterval('secondPassed()', 1000);
+			myKeyPress.timeOn = true;
+		}
+
+		//check the key pressed:
+        var keynum;
+		if(e.which == 32 || e.keyCode == 32)
+		{				
+        		checkingWord();
+         }
+            else if(window.event){ // IE					
+            	keynum = e.keyCode;
+            }else
+                if(e.which){ // Netscape/Firefox/Opera					
+            		keynum = e.which;
+                 }
+        }
+        
+        //function to check the word, displaying true or false
+        function checkingWord()
+        {
+        	var wordA = document.getElementById('inputfield').value;
+        	if(wordA === wordlist[current] || wordA === " "+wordlist[current])
+        	{
+        		document.getElementById("word"+current).classList.add("answeredright");
+        		document.getElementById("word"+current).style.backgroundColor = "white";
+        		current++; liststart++; listend++; correctWord++;
+        		document.getElementById("word"+current).classList.add("currentword");
+        		document.getElementById('inputfield').value = '';
+        	}
+        	else
+        	{
+        		document.getElementById("word"+current).classList.add("answeredwrong");
+        		document.getElementById("word"+current).style.backgroundColor = "white";
+        		current++; liststart++; listend++; wrongWord++;
+        		document.getElementById("word"+current).classList.add("currentword");
+        		document.getElementById('inputfield').value = '';
+        	}
+        	//condition for go to the next line.
+        	if(current % 9 === 0)
+        	{
+				DisplayWords();
+        	}
+        }
+        
+        //function to check every character, trigger when the user press a key
+        function checkingCharacter()
+        {
+        	var wordB = document.getElementById('inputfield').value;
+        	var wordC = wordlist[current];
+        	
+        	if(wordB.charAt(0)  === " ")				//if the first char is empty, erase it.
+    		{
+    			wordB = wordB.slice(1,wordB.length);
+    		}
+	        		
+    		for(i = 0; i < wordB.length; i++)
+        	{
+	        	if(wordB.charAt(i) === wordC.charAt(i))			//displaying hint for the user
+	        	{
+        			document.getElementById("word"+current).style.backgroundColor = "#CCC";
+					correctStroke++;
+				}
+	        	else
+	        	{
+        			document.getElementById("word"+current).style.backgroundColor = "#FF4610";
+					wrongStroke++;
+	        	}
+        	}
+        }
+        
+        //function that display score, trigger after time run out.
+        function displayScore()
+        {
+        	var scoretext = "";
+			var accuracy = correctStroke/(wrongStroke+correctStroke);
+			wpm = Math.round(correctWord*accuracy);
+
+			scoretext += "<span class='label' >RESULT : </span>";
+			scoretext += "<span class='answeredright'>Words per Minute = <span class='label' >"+wpm+"</span></span>, ";
+			scoretext += "Right Words = <span class='label' >"+correctWord+"</span>, ";
+			scoretext += "Wrong Words = <span class='label' >"+wrongWord+"</span>, ";
+			scoretext += "Correct Keystrokes = <span class='label' >"+correctStroke+"</span>, ";
+			scoretext += "Incorrect Keystrokes = <span class='label' >"+wrongStroke+"</span>";
+
+
+			document.getElementById("scoreBoard").innerHTML = scoretext;
+        }
+</script>
+<script>
+		//countdown function:
+		seconds = 60;
+		function secondPassed() {
+			
+			if(myKeyPress.timeOn === false)
+			{
+				seconds = 60;
+				return;
+			}
+				
+		    var minutes = Math.round((seconds - 30)/60);
+		    var remainingSeconds = seconds % 60;
+		    if (remainingSeconds < 10) {
+		        remainingSeconds = "0" + remainingSeconds; 
+		    }
+		    document.getElementById('timer').innerHTML = minutes + ":" + remainingSeconds;
+		    if (seconds < 1) {
+		    	
+		    	//final state:
+		        clearInterval(countdownTimer);
+        		document.getElementById("inputfield").readOnly = true;
+        		
+        		//refresh the game:
+        		displayScore();
+        		seconds = 60;
+				wpm = 0;
+				current = 0;
+				liststart = 0;
+				listend = 10;
+				correctWord = 0;
+				wrongWord = 0;
+		    } else {
+		        seconds--;
+		    }
+		}
+</script>
+<script>
+	//function that refresh the game
+	function refreshButton() {
+		
+		document.getElementById('timer').innerHTML = "1:00";
+		document.getElementById('inputfield').value = "";
+		myKeyPress.gameOn = false;
+        myKeyPress.timeOn = false;
+        ShuffleWordList();
+		DisplayWords();
+		clearInterval(countdownTimer);
+		document.getElementById("inputfield").readOnly = false;
+		document.getElementById("scoreBoard").innerHTML = "";
+		
+		//refresh all variables.
+		seconds = 60;
+		wpm = 0;
+		current = 0;
+		liststart = 0;
+		listend = 10;
+		correctWord = 0;
+		wrongWord = 0;
+		correctStroke = 0;
+		wrongStroke =0;
+	
+	}
+</script>
+
+</html>

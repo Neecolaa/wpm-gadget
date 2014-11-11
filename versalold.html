@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Words Per Minute Tester</title>
+<script src="bower_components/versal-component-runtime/dist/runtime.min.js"></script>
+<link rel="import" href="bower_components/versal-gadget-api/versal-gadget-api.html">
+<link rel="stylesheet" href="assets/words.css">
+</head>
+
+<style>
+input {
+  font-size: 20px;
+  padding: 5px;
+  min-width: 300px;
+}
+input[readonly] {
+  border: 1px solid transparent;
+}
+
+</style>
+
+<body>
+
+<div id="reload box" style="display: block;">
+	<div id="words" class="row" style="opacity: 1; display: block;">
+    	<div id="row1" style="top: 1px; display: block; padding: 5px;">
+	        
+	        <!--display words-->
+<script>
+/*Defaults for user adjusted settings*/
+	var words ="deep center agree branch bench arrive beach greedy bright dive alarm chew board cheer enemy bare clear curious brave calm bridge ocean collect seashell pack field hour float eager gentle hero prove pass fresh fair fear plant safe midnight inn idea finally famous cross enormous feast dash frighten dangerous insect forest crowd herd flour entire damp trail travel doubt wave dawn wonder evening exactly search weak steady squeeze weekend tremble pale soar team wise worry warn tool village whisper shiver frown tiny notice stack present rainbow seal leader leap smooth island pain soil nibble scatter signal harm author screech chapter snowstorm blends driving capitalization create moment direction character complete describe fantasy consonants final locate order language punctuation magazine predict initial steer symbol questions written syllable reality handlebars uppercase stream conversation fiction dictionary difference solo discussion brakes quite music adjective unless margin wander glossary pedals nonfiction publish sound quit message noun pronoun prewriting reread purpose quiet verb theater harmony mama textbooks coast important minute chorus forgotten folktale vowel main idea urban obey tradition forgive prank vegetation lowercase doubles another shelter magnet balance thermometer mammoth grouping dissolving minus surprise distance habitat brought certain pebble magnifier caught solid loose experience prehistoric scientist numeral reasoning different weight climate whether custom citizen universe vibration heritage hundred privilege community duty justice aircraft differences listen without continent belongings rural settlement authority services thought through farther country forget landmark volunteer goods fed beautiful beneath example fold education product elections inside asleep believe break teeth please hung equality change almost hungry throat measure fine globe meant maybe crayon thousand sudden among vegetables matter rather chance return corner gather mild worn pint division several quart mayor fool concert noon southern wherever grew flew noise respect football double hook goodbye practice pencil lawn noisy haul period wasps lying bend receive build slept fought correct spend rights mix thick trick built incorrect danger remove bent luck wore probably straight spooky plenty tone increase mailboxes";
+	var visiblelength = 10;
+	
+	/*Starting settings*/
+	var current = 0;
+	var liststart = 0;
+	var listend = visiblelength;
+	var wordlist = words.split(" ");
+	
+	//result variables:
+	var wpm = 0;
+	var correctWord = 0;
+	var wrongWord = 0;
+	
+	
+	ShuffleWordList();
+	DisplayWords();
+
+	function DisplayWords()
+	{
+		var wordwillbedisplay = "";
+		for(i = liststart; i < listend; i++)
+		{
+			// if(i === current)
+			// document.write("<span id='word"+i+"' style='background-color: #CCC;'>"+wordlist[i]+" </span>");
+			// else
+			// document.write("<span id='word"+i+"' style=''>"+wordlist[i]+" </span>");
+
+			if(i === current)
+			wordwillbedisplay += "<span id='word"+i+"' class='currentword'>"+" "+wordlist[i]+" </span>&nbsp;";
+			else
+			wordwillbedisplay += "<span id='word"+i+"' style=''>"+" "+wordlist[i]+" </span>&nbsp;";
+
+		}
+		document.getElementById("row1").innerHTML = wordwillbedisplay;
+
+	}
+	
+	function ShuffleWordList()
+	{
+		for(i = 0; i < wordlist.length/2; i++)
+		{
+		var rand1 = Math.floor(Math.random() * wordlist.length);
+		var rand2 = Math.floor(Math.random() * wordlist.length);
+		
+		var temp = wordlist[rand1];
+		wordlist[rand1] = wordlist[rand2];
+		wordlist[rand2] = temp;
+		}
+	}
+</script>
+	             
+        </div>
+    </div>
+</div>		
+			<!--input line-->
+			<div id="input-row" class="row">
+    		<div style="max-width: 620px; margin: auto;">
+    			
+    			<!--user input-->
+        		<div style="margin-right: 137px;">
+            		<input id="inputfield" class="form-control" type="text" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" placeholder="" dir="ltr" value="" onkeypress="return myKeyPress(event)"></input>
+        		</div>
+        		
+        		<!--timer-->
+        		<div id="timer" class="" title="" style="width: 70px; margin-right: 7px;">
+    			1:00
+				</div>
+        		<!--refresh button-->
+        		<div style="width: 50px; /*margin-top: -5px;*/ display:block;">
+				    <button id="reload-btn" type="button" onmousedown="refreshButton()">
+				        <span class="refreshBtn">&#8635;</span>
+				    </button>
+				</div>
+    		</div>
+    		<div id ="scoreBoard" style="max-width: 620px; margin: auto;">
+				    
+			</div>
+    		</div>
+
+
+</body>
+
+<!--<script>
+window.addEventListener('HTMLImportsLoaded', function(){
+
+  var greeting = document.querySelector('[name=greeting]');
+  var learnerName = document.querySelector('[name=learnerName]');
+  var player = new VersalPlayerAPI();
+
+  greeting.addEventListener('change', function(e){
+    player.setAttribute(greeting.name, greeting.value);
+  });
+
+  learnerName.addEventListener('change', function(e){
+    player.setLearnerAttribute(learnerName.name, learnerName.value);
+  });
+
+  player.on('attributesChanged', function(data){
+    if(data.greeting) {
+      greeting.value = data.greeting;
+    };
+  });
+
+  player.on('learnerStateChanged', function(data){
+    if(data.learnerName) {
+      learnerName.value = data.learnerName;
+    };
+  });
+
+  player.on('editableChanged', function(editable){
+    greeting.readOnly = !editable.editable;
+    learnerName.readOnly = editable.editable;
+  });
+
+  player.setHeight(60);
+  player.startListening();
+});
+</script>
+-->
+
+<script type="text/javascript">
+        myKeyPress.gameOn = false;
+        myKeyPress.timeOn = false;
+        function myKeyPress(e){
+		
+		//Start the timer:
+		myKeyPress.gameOn = true;		
+		if(myKeyPress.gameOn === true && myKeyPress.timeOn === false)
+		{
+			countdownTimer = setInterval('secondPassed()', 1000);
+			myKeyPress.timeOn = true;
+		}
+
+		//check the key pressed:
+        var keynum;
+		if(e.which == 32 || e.keyCode == 32)
+		{				
+        		//alert("You pressed a spacebar inside the input field!");
+        		checkingWord();
+         }
+            else if(window.event){ // IE					
+            	keynum = e.keyCode;
+            	//checkingWord();
+            	//alert(String.fromCharCode(keynum));
+            }else
+                if(e.which){ // Netscape/Firefox/Opera					
+            		keynum = e.which;
+            		//checkingWord();
+            		//alert(String.fromCharCode(keynum));
+                 }
+        }
+        
+        function checkingWord()
+        {
+        	var wordA = document.getElementById('inputfield').value;
+        	if(wordA === wordlist[current] || wordA === " "+wordlist[current])
+        	{
+        		document.getElementById("word"+current).classList.add("answeredright");
+        		document.getElementById("word"+current).style.backgroundColor = "white";
+        		current++; liststart++; listend++; correctWord++;
+        		document.getElementById("word"+current).classList.add("currentword");
+        		document.getElementById('inputfield').value = '';
+        	}
+        	else
+        	{
+        		document.getElementById("word"+current).classList.add("answeredwrong");
+        		document.getElementById("word"+current).style.backgroundColor = "white";
+        		current++; liststart++; listend++; wrongWord++;
+        		document.getElementById("word"+current).classList.add("currentword");
+        		document.getElementById('inputfield').value = '';
+        	}
+        	//go to the next line.
+        	if(current % 9 === 0)
+        	{
+				DisplayWords();
+        	}
+        	
+        }
+        function displayScore()
+        {
+        	var scoretext = "";
+			
+			wpm = correctWord+wrongWord;
+
+			//scoretext += "<span class='' style='float:left;white-space: nowrap;' >RESULT : ";
+			scoretext += "<span class='label' >RESULT : </span>";
+			scoretext += "Word per Minute = <span class='label' >"+wpm+"</span>, ";
+			scoretext += "Correct Word = <span class='label' >"+correctWord+"</span>, ";
+			scoretext += "Wrong Word = <span class='label' >"+wrongWord+"</span>";
+		
+			document.getElementById("scoreBoard").innerHTML = scoretext;
+        }
+</script>
+<script>
+		//countdown function:
+		
+		seconds = 60;
+		function secondPassed() {
+			
+			if(myKeyPress.timeOn === false)
+			{
+				seconds = 60;
+				return;
+			}
+				
+		    var minutes = Math.round((seconds - 30)/60);
+		    var remainingSeconds = seconds % 60;
+		    if (remainingSeconds < 10) {
+		        remainingSeconds = "0" + remainingSeconds; 
+		    }
+		    document.getElementById('timer').innerHTML = minutes + ":" + remainingSeconds;
+		    if (seconds < 1) {
+		        clearInterval(countdownTimer);
+        		document.getElementById("inputfield").readOnly = true;
+        		displayScore();
+		    } else {
+		        seconds--;
+		    }
+		}
+</script>
+<script>
+	function refreshButton() {
+		
+		document.getElementById('timer').innerHTML = "1:00";
+		document.getElementById('inputfield').value = "";
+		myKeyPress.gameOn = false;
+        myKeyPress.timeOn = false;
+        ShuffleWordList();
+		DisplayWords();
+		clearInterval(countdownTimer);
+		document.getElementById("inputfield").readOnly = false;
+		document.getElementById("scoreBoard").innerHTML = "";
+		
+		//refresh all variables.
+		seconds = 60;
+		wpm = 0;
+		current = 0;
+		liststart = 0;
+		listend = 10;
+		correctWord = 0;
+		wrongWord = 0;
+	
+	}
+
+</script>
+
+</html>

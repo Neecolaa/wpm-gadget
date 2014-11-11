@@ -1,0 +1,22 @@
+{
+  "name": "versal-gadget-template",
+  "version": "0.0.1",
+  "authors": [
+    "Allen Clark, Malcom Donahoe, Nicole Dubin, & Kevin Permana <nicole.dubin@gmail.com>"
+  ],
+  "description": "A game that gives you one minute to type as many words from the list as you can!",
+  "main": "versal.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "versal-gadget-api": "0.0.1",
+    "versal-component-runtime": "~0.2.4"
+  }
+}

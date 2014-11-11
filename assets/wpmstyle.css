@@ -1,0 +1,40 @@
+@charset "UTF-8";
+/* CSS Document */
+body {
+	font: 16px 'AvenirNextLTPro-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+	color: black;
+}
+
+.answeredright 
+{
+	color: #090;
+}
+
+.answeredwrong
+{
+	color: #900;
+	text-decoration: line-through;
+}
+
+.currentword
+{
+	background-color: #CCC;
+	border-radius: 3px;
+}
+
+.currentwrong
+{
+	background-color: #cc412f;
+	border-radius: 3px;
+	color: #FFF;
+}
+
+.label
+{
+	font-weight: bold;
+}
+
+#wordlist
+{
+	margin: 2px;
+}
