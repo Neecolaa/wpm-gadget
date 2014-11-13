@@ -21,10 +21,6 @@
 
 <body>
 
-<!--<input type="text" name="greeting" readonly value="What is your name?">
-<input type="text" name="learnerName">
-<input type="text" name="greeting" readonly value="What is your name?">-->
-
 <div id="reload box" style="display: block; padding: 10px;">
 	<div id="words" class="row" style="opacity: 1; display: block;">
 		<div id="row1" style="top: 1px; display: block; padding-bottom: 5px;">
@@ -200,16 +196,19 @@
 	        	}
         	}
         }
+
+		for(i = 0; i < wordC.length; i++)
         
         //function that display score, trigger after time run out.
         function displayScore()
         {
         	var scoretext = "";
 			var accuracy = correctStroke/(wrongStroke+correctStroke);
-			wpm = Math.round(correctWord*accuracy);
+			wpm = correctWord;
 
-			scoretext += "<span class='label' >RESULT : </span>";
-			scoretext += "<span class='answeredright'>Words per Minute = <span class='label' >"+wpm+"</span></span>, ";
+			scoretext += "<span class='label' >RESULTS : </span>";
+			scoretext += "<span class='answeredright' >Words per Minute = <span class='label' >"+wpm+"</span>, ";
+			scoretext += "Accuracy = <span class='label' >"+Math.floor(accuracy*100)+"% </span></span>, ";
 			scoretext += "Right Words = <span class='label' >"+correctWord+"</span>, ";
 			scoretext += "Wrong Words = <span class='label' >"+wrongWord+"</span>, ";
 			scoretext += "Correct Keystrokes = <span class='label' >"+correctStroke+"</span>, ";
@@ -251,6 +250,8 @@
 				listend = 10;
 				correctWord = 0;
 				wrongWord = 0;
+				correctStroke = 0;
+				wrongStroke = 0;
 		    } else {
 		        seconds--;
 		    }
